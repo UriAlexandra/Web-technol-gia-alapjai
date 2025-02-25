@@ -1,0 +1,44 @@
+body{
+    background-color: blanchedalmond;
+
+}
+
+#game {
+    width: 100%;
+    max-width: 700px;
+
+}
+
+#title{
+    background-color: aliceblue;
+    font-weight: bold;
+    padding: 5px;
+
+}
+
+#game ul {
+    list-style: none;
+    padding: 0;
+}
+
+.alternative{
+    background-color: lightblue;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+
+}
+
+.alternative:hover {
+    opacity: 70%;
+
+}
+
+#result, #score {
+    color: aqua;
+}
+
+#result {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
