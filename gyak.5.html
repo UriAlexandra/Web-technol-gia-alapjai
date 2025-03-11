@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Számkitaláló Játék</title>
+    <style>
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Számkitaláló Játék</h1>
+        <p>Próbáld meg kitalálni a számot 0 és 1 000 000 között!</p>
+        <button class="btn" onclick="startGame()">Indítás</button>
+        <div class="message" id="message"></div>
+        <div class="footer">Jó szórakozást!</div>
+    </div>
+
+    <script>
+        function startGame() {
+            // Véletlenszám generálása 0 és 1 000 000 között
+            const targetNumber = Math.floor(Math.random() * 1000001);
+            let attempts = 0;
+            const maxAttempts = 20;
+
+            const messageElement = document.getElementById("message");
+
+            // Üzenet a kezdésről
+            messageElement.textContent = "Kezdődhet a játék! Írd be a tippjeidet.";
+            
+            function guessNumber() {
+                if (attempts < maxAttempts) {
+                    let guess = prompt(`Próbálkozás ${attempts + 1}: Írj be egy számot!`);
+                    
+                    guess = parseInt(guess);
+
+                    if (isNaN(guess)) {
+                        alert("Érvénytelen bemenet! Kérlek, egy számot adj meg.");
+                        guessNumber();
+                        return;
+                    }
+
+                    attempts++;
+
+                    if (guess === targetNumber) {
+                        messageElement.textContent = `Gratulálok, ${attempts} lépésből eltaláltad!`;
+                        messageElement.style.color = "green";
+                    } else if (guess > targetNumber) {
+                        messageElement.textContent = `${attempts}. tipp nem talált: A megoldás kisebb.`;
+                    } else {
+                        messageElement.textContent = `${attempts}. tipp nem talált: A megoldás nagyobb.`;
+                    }
+                } else {
+                    messageElement.textContent = `Sajnos nem sikerült! A keresett szám: ${targetNumber}`;
+                    messageElement.style.color = "red";
+                }
+            }
+
+            guessNumber();
+        }
+    </script>
+</body>
+</html>
